@@ -1,20 +1,29 @@
-import { ProductWidgetProps } from "models/ProductWidget";
+import { Colors, ProductWidgetProps } from "models/ProductWidget";
 import Badge from "./Badge";
 import InfoIcon from "./InfoIcon";
 import Tooltip from "components/shared/Tooltip";
 import ToggleSwitch from "components/shared/ToggleSwitch";
 import CheckBox from "components/shared/CheckBox";
 import { allColors, changeColor } from "utils";
+import { useState } from "react";
 
 function ProductCard({ product }: { product: ProductWidgetProps }) {
-  const { id, type, amount, action, active, linked, selectedColor } = product;
+  const { type, amount, action, active, linked, selectedColor } = product;
+  const [color, setColor] = useState<Colors>(selectedColor);
+
+  const changeBadgeColor = (color: string) => {
+    const colorSplitted = color.split("-");
+    const col = colorSplitted[1] as Colors;
+    setColor(col);
+  };
+
   return (
     <div className="w-[221px] flex flex-col gap-[10px]">
       <Badge
         type={type}
         amount={amount}
         action={action}
-        selectedColor={selectedColor}
+        selectedColor={color}
       />
       <div className="flex justify-between">
         <div className="flex">
@@ -37,6 +46,7 @@ function ProductCard({ product }: { product: ProductWidgetProps }) {
             <div
               key={index}
               className={`w-[16px] h-[16px] ${color} hover:opacity-80`}
+              onClick={() => changeBadgeColor(color)}
             ></div>
           ))}
         </div>

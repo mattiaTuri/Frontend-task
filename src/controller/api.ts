@@ -1,5 +1,4 @@
 import axios from "axios";
-
 import { ProductWidgetProps } from "models/ProductWidget";
 
 export const getProductsWidget = async () => {
