@@ -1,0 +1,71 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-family: "Cabin-regular";
+  src: url("../../public/fonts/Cabin-Regular.ttf");
+}
+
+@font-face {
+  font-family: "Cabin-bold";
+  src: url("../../public/fonts/Cabin-Bold.ttf");
+}
+
+h3,
+span {
+  font-family: "Cabin-bold";
+}
+
+p {
+  font-family: "Cabin-regular";
+}
+
+#linked-checkbox[type="checkbox"]:checked {
+  background-image: url("../components//shared/ToggleChecked.svg");
+  background-size: contain;
+  border: none;
+}
+
+#linked-checkbox[type="checkbox"] {
+  -webkit-appearance: initial;
+  appearance: initial;
+  border: 2px solid #212121;
+  border-radius: 5px;
+  position: relative;
+}
+
+#linked-checkbox[type="checkbox"]:after {
+  transition-duration: 300ms;
+  transition-timing-function: ease-in-out;
+  content: "";
+  inset: 0;
+  scale: 2;
+  border-radius: 50%;
+  background-color: transparent;
+  position: absolute;
+}
+
+#linked-checkbox[type="checkbox"]:hover:after {
+  background-color: #afc6bd;
+  opacity: 50%;
+}
+
+input:checked + span {
+  background-color: #3b755f;
+}
+
+input:checked + span > span {
+  transform: translateX(20px);
+  border: 0.68px solid #3b755f;
+}
+
+input:checked + span > :nth-child(2) {
+  transform: translateX(20px);
+}
