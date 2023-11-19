@@ -1,4 +1,5 @@
 import ProductCard from "components/products/ProductCard";
+import Skeleton from "components/products/Skeleton";
 import { getProductsWidget } from "controller/api";
 import { ProductProps, ProductWidgetProps } from "models/ProductWidget";
 import { useEffect, useState } from "react";
@@ -39,7 +40,13 @@ function Products() {
                 return <ProductCard key={product.id} product={product} />;
               })
             : null}
-          {loading && <p>Caricamento</p>}
+          {loading && (
+            <div className="flex flex-col gap-[24px] lg:flex-row lg:justify-between w-full items-center">
+              <Skeleton />
+              <Skeleton />
+              <Skeleton />
+            </div>
+          )}
           {error && <p>{error}</p>}
         </div>
       </div>
