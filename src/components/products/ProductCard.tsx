@@ -8,7 +8,7 @@ import { allColors, changeColor } from "utils";
 import { useState } from "react";
 
 function ProductCard({ product }: { product: ProductProps }) {
-  const { type, amount, action, active, linked, selectedColor } = product;
+  const { id, type, amount, action, active, linked, selectedColor } = product;
   const [color, setColor] = useState<Colors>(selectedColor);
 
   const changeBadgeColor = (color: string) => {
@@ -55,7 +55,7 @@ function ProductCard({ product }: { product: ProductProps }) {
         <p className="text-[14px] text-[#3B755F] leading-[17.01px]">
           Activate badge
         </p>
-        <ToggleSwitch active={active} />
+        <ToggleSwitch id={id} active={active} />
       </div>
     </div>
   );

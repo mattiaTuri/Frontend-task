@@ -6,17 +6,12 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setLoadingState } from "store/Product/productsSlice";
 import { productSelector } from "store/Product/selector";
-import { AppDispatch } from "store/store";
 
 function Products() {
-  const dispatch = useDispatch<AppDispatch>();
   const product = useSelector(productSelector);
   const { loading, products, error } = product;
 
-  useEffect(() => {
-    dispatch(setLoadingState({ loading: true, error: "" }));
-    dispatch(getProduct());
-  }, []);
+  useEffect(() => {}, [products]);
 
   return (
     <div className="w-[331px] bg-[#F9F9F9] rounded-[8px] drop-shadow-card lg:w-[851px] lg:h-[419px]">

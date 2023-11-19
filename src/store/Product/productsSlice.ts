@@ -14,6 +14,9 @@ export const productsSlice = createSlice({
       state.loading = action.payload.loading;
       state.error = action.payload.error;
     },
+    updateProducts: (state, action) => {
+      state.products = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(getProduct.fulfilled, (state, action) => {
@@ -24,5 +27,5 @@ export const productsSlice = createSlice({
   },
 });
 
-export const { setLoadingState } = productsSlice.actions;
+export const { setLoadingState, updateProducts } = productsSlice.actions;
 export default productsSlice.reducer;
