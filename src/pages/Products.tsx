@@ -1,8 +1,31 @@
 import ProductCard from "components/products/ProductCard";
-import { productsWidget } from "date/Date";
-import { ProductWidgetProps } from "models/ProductWidget";
+import { getProductsWidget } from "controller/api";
+import { ProductProps, ProductWidgetProps } from "models/ProductWidget";
+import { useEffect, useState } from "react";
 
 function Products() {
+  const [productsWidget, setProductsWidget] = useState<ProductProps>({
+    loading: false,
+    products: [],
+    error: "",
+  });
+
+  const { loading, products, error } = productsWidget;
+
+  useEffect(() => {
+    const apiCall = async () => {
+      setProductsWidget((oldProducts) => ({
+        ...oldProducts,
+        loading: true,
+        error: "",
+      }));
+      const product: ProductProps = await getProductsWidget();
+      setProductsWidget(product);
+    };
+
+    apiCall();
+  }, []);
+
   return (
     <div className="w-[331px] bg-[#F9F9F9] rounded-[8px] drop-shadow-card lg:w-[851px] lg:h-[419px]">
       <div className="p-[36px]">
@@ -11,9 +34,13 @@ function Products() {
           <div className="border-[#B0B0B0] border-[2px] w-full"></div>
         </div>
         <div className="flex flex-col lg:flex-row lg:justify-between items-center gap-[24px]">
-          {productsWidget.map((product: ProductWidgetProps) => {
-            return <ProductCard key={product.id} product={product} />;
-          })}
+          {products.length > 0
+            ? products.map((product: ProductWidgetProps) => {
+                return <ProductCard key={product.id} product={product} />;
+              })
+            : null}
+          {loading && <p>Caricamento</p>}
+          {error && <p>{error}</p>}
         </div>
       </div>
     </div>
