@@ -1,4 +1,4 @@
-import { Colors, ProductWidgetProps } from "models/ProductWidget";
+import { Colors, ProductProps } from "models/Product";
 import Badge from "./Badge";
 import InfoIcon from "./InfoIcon";
 import Tooltip from "components/shared/Tooltip";
@@ -7,7 +7,7 @@ import CheckBox from "components/shared/CheckBox";
 import { allColors, changeColor } from "utils";
 import { useState } from "react";
 
-function ProductCard({ product }: { product: ProductWidgetProps }) {
+function ProductCard({ product }: { product: ProductProps }) {
   const { type, amount, action, active, linked, selectedColor } = product;
   const [color, setColor] = useState<Colors>(selectedColor);
 

@@ -1,6 +1,6 @@
-import { ProductWidgetProps } from "../models/ProductWidget";
+import { ProductProps } from "../models/Product";
 
-export const productsWidget: ProductWidgetProps[] = [
+export const productsWidget: ProductProps[] = [
   {
     id: 1,
     type: "plastic bottles",

@@ -1,30 +1,21 @@
 import ProductCard from "components/products/ProductCard";
 import Skeleton from "components/products/Skeleton";
-import { getProductsWidget } from "controller/api";
-import { ProductProps, ProductWidgetProps } from "models/ProductWidget";
+import { getProduct } from "controller/api";
+import { ProductProps } from "models/Product";
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setLoadingState } from "store/Product/productsSlice";
+import { productSelector } from "store/Product/selector";
+import { AppDispatch } from "store/store";
 
 function Products() {
-  const [productsWidget, setProductsWidget] = useState<ProductProps>({
-    loading: false,
-    products: [],
-    error: "",
-  });
-
-  const { loading, products, error } = productsWidget;
+  const dispatch = useDispatch<AppDispatch>();
+  const product = useSelector(productSelector);
+  const { loading, products, error } = product;
 
   useEffect(() => {
-    const apiCall = async () => {
-      setProductsWidget((oldProducts) => ({
-        ...oldProducts,
-        loading: true,
-        error: "",
-      }));
-      const product: ProductProps = await getProductsWidget();
-      setProductsWidget(product);
-    };
-
-    apiCall();
+    dispatch(setLoadingState({ loading: true, error: "" }));
+    dispatch(getProduct());
   }, []);
 
   return (
@@ -36,7 +27,7 @@ function Products() {
         </div>
         <div className="flex flex-col lg:flex-row lg:justify-between items-center gap-[24px]">
           {products.length > 0
-            ? products.map((product: ProductWidgetProps) => {
+            ? products.map((product: ProductProps) => {
                 return <ProductCard key={product.id} product={product} />;
               })
             : null}

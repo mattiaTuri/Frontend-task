@@ -1,10 +1,4 @@
 export interface ProductProps {
-  loading: boolean;
-  products: ProductWidgetProps[];
-  error: string;
-}
-
-export interface ProductWidgetProps {
   id: number;
   type: Type;
   amount: number;

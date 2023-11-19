@@ -1,12 +1,13 @@
+import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { ProductWidgetProps } from "models/ProductWidget";
+import { ProductProps } from "models/Product";
 
-export const getProductsWidget = async () => {
+export const getProduct = createAsyncThunk("product/getProduct", async () => {
   try {
-    const response = await axios.get<ProductWidgetProps[]>(
+    const response = await axios.get<ProductProps[]>(
       "https://api.mocki.io/v2/016d11e8/product-widgets"
     );
-    const product: ProductWidgetProps[] = response.data;
+    const product: ProductProps[] = response.data;
     return { loading: false, products: product, error: "" };
   } catch (error) {
     if (axios.isAxiosError(error)) {
@@ -14,4 +15,4 @@ export const getProductsWidget = async () => {
     }
     return { loading: false, products: [], error: (error as Error).message };
   }
-};
+});

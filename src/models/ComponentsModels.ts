@@ -1,4 +1,4 @@
-import { Actions, Colors, Type } from "./ProductWidget";
+import { Actions, Colors, Type } from "./Product";
 
 export interface BadgeProps {
   type: Type;
