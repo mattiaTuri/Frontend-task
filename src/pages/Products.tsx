@@ -1,10 +1,8 @@
 import ProductCard from "components/products/ProductCard";
 import Skeleton from "components/products/Skeleton";
-import { getProduct } from "controller/api";
 import { ProductProps } from "models/Product";
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { setLoadingState } from "store/Product/productsSlice";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
 import { productSelector } from "store/Product/selector";
 
 function Products() {
@@ -20,7 +18,10 @@ function Products() {
         <div className="pb-[20px]">
           <div className="border-[#B0B0B0] border-[2px] w-full"></div>
         </div>
-        <div className="flex flex-col lg:flex-row lg:justify-between items-center gap-[24px]">
+        <div
+          data-testid="container-products"
+          className="flex flex-col lg:flex-row lg:justify-between items-center gap-[24px]"
+        >
           {products.length > 0
             ? products.map((product: ProductProps) => {
                 return <ProductCard key={product.id} product={product} />;

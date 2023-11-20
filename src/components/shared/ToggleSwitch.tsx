@@ -27,6 +27,7 @@ function ToggleSwitch({ id, active }: ToggleSwitch) {
   return (
     <div className="relative w-[40.11px] h-[20.05px] inline-block group">
       <input
+        data-testid={`switch-${id}`}
         type="radio"
         className="opacity-0 cursor-pointer w-full h-full z-10 relative"
         checked={active}

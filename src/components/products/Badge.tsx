@@ -2,9 +2,11 @@ import { BadgeProps } from "models/ComponentsModels";
 import Logo from "./Logo";
 import { changeColor } from "utils";
 
-function Badge({ type, amount, action, selectedColor }: BadgeProps) {
+function Badge({ id, type, amount, action, selectedColor }: BadgeProps) {
   return (
     <div
+      data-testid={`badge-${id}`}
+      data-color={changeColor[selectedColor]}
       className={`flex items-center justify-center gap-[11.91px] h-[66px] ${changeColor[selectedColor]} rounded-[5.95px]`}
     >
       <Logo />

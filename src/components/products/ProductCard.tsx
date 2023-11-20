@@ -14,7 +14,7 @@ function ProductCard({ product }: { product: ProductProps }) {
   useEffect(() => {
     const col = changeColor[selectedColor];
     document.querySelector<HTMLElement>(
-      `#badgeColoursGroup-${id} > #${col}`
+      `#badgeColoursGroup-${id} > .${col}`
     )!.style.border = "1.5px solid #B0B0B0";
   }, []);
 
@@ -35,8 +35,9 @@ function ProductCard({ product }: { product: ProductProps }) {
   };
 
   return (
-    <div className="w-[221px] flex flex-col gap-[10px]">
+    <div id={id.toString()} className="w-[221px] flex flex-col gap-[10px]">
       <Badge
+        id={id}
         type={type}
         amount={amount}
         action={action}
@@ -58,11 +59,15 @@ function ProductCard({ product }: { product: ProductProps }) {
         <p className="text-[14px] text-[#3B755F] leading-[17.01px]">
           Badge colour
         </p>
-        <div id={`badgeColoursGroup-${id}`} className="flex gap-1">
+        <div
+          id={`badgeColoursGroup-${id}`}
+          data-testid={`badgeColoursGroup-${id}`}
+          className="flex gap-1"
+        >
           {allColors().map((color: string, index: number) => (
             <div
               key={index}
-              id={color}
+              data-color={color}
               className={`w-[16px] h-[16px] ${color} hover:opacity-80`}
               onClick={(e) => changeBadgeColor(e, color)}
             ></div>
