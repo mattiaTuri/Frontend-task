@@ -2,9 +2,9 @@
 
 ## Table of Contents
 
-- [Description](description)
+- [Description](#description)
 - [API Reference](#api-reference)
-- [Installation and Setup Instructions](#installation-and-setup-instructions)## Table of Contents
+- [Installation and Setup Instructions](#installation-and-setup-instructions)
 - [Folder structure](#folder-structure)
 - [Used Technologies](#used-technologies)
 
