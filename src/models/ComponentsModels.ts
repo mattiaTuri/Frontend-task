@@ -7,3 +7,14 @@ export interface BadgeProps {
   action: Actions;
   selectedColor: Colors;
 }
+
+export interface CheckboxProps {
+  linked: boolean;
+  onClickFunction: (e: React.MouseEvent<HTMLInputElement, MouseEvent>) => void;
+}
+
+export interface ToggleSwitchProps {
+  id: number;
+  active: boolean;
+  onChangeFunction: () => void;
+}

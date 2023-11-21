@@ -7,14 +7,16 @@ import { productSelector } from "store/Product/selector";
 
 function Products() {
   const product = useSelector(productSelector);
-  const { loading, products, error } = product;
+  const { loading, productsList, error } = product;
 
-  useEffect(() => {}, [products]);
+  useEffect(() => {}, [productsList]);
 
   return (
     <div className="w-[331px] bg-[#F9F9F9] rounded-[8px] drop-shadow-card lg:w-[851px] lg:h-[419px]">
       <div className="p-[36px]">
-        <h3 className="text-[30px] text-[#212121]">Per product widgets</h3>
+        <h3 className="text-[30px] text-[#212121] leading-[36px] pb-[12px]">
+          Per product widgets
+        </h3>
         <div className="pb-[20px]">
           <div className="border-[#B0B0B0] border-[2px] w-full"></div>
         </div>
@@ -22,8 +24,8 @@ function Products() {
           data-testid="container-products"
           className="flex flex-col lg:flex-row lg:justify-between items-center gap-[24px]"
         >
-          {products.length > 0
-            ? products.map((product: ProductProps) => {
+          {productsList.length > 0
+            ? productsList.map((product: ProductProps) => {
                 return <ProductCard key={product.id} product={product} />;
               })
             : null}

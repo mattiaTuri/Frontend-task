@@ -5,33 +5,49 @@ import Tooltip from "components/shared/Tooltip";
 import ToggleSwitch from "components/shared/ToggleSwitch";
 import CheckBox from "components/shared/CheckBox";
 import { allColors, changeColor } from "utils";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { productSelector } from "store/Product/selector";
+import { editProduct, updateProductsList } from "store/Product/productsSlice";
+import {
+  applyBorderToSelectedColor,
+  selectColor,
+  updateSwitchState,
+} from "./functions/Functions";
 
 function ProductCard({ product }: { product: ProductProps }) {
   const { id, type, amount, action, active, linked, selectedColor } = product;
-  const [color, setColor] = useState<Colors>(selectedColor);
+  const productsObj = useSelector(productSelector);
+  const dispatch = useDispatch();
+  const { productsList } = productsObj;
 
   useEffect(() => {
-    const col = changeColor[selectedColor];
+    const color: string = changeColor[selectedColor];
     document.querySelector<HTMLElement>(
-      `#badgeColoursGroup-${id} > .${col}`
+      `#badgeColoursGroup-${id} > .${color}`
     )!.style.border = "1.5px solid #B0B0B0";
   }, []);
 
-  const changeBadgeColor = (e: any, color: string) => {
-    const colorSplitted = color.split("-");
-    const col = colorSplitted[1] as Colors;
-    setColor(col);
-    const p = document.querySelectorAll<HTMLElement>(
-      `#badgeColoursGroup-${id} > div`
-    );
-    document
-      .querySelectorAll<HTMLElement>(`#badgeColoursGroup-${id} > div`)
-      .forEach((elem: HTMLElement) => {
-        elem.style.border = "0px";
-      });
+  const changeBadgeColor = (
+    e: React.MouseEvent<HTMLElement>,
+    color: string
+  ) => {
+    const newColor: Colors = selectColor(color);
+    dispatch(editProduct({ ...product, selectedColor: newColor }));
+    applyBorderToSelectedColor(id, e);
+  };
 
-    e.target.style.border = "1.5px solid #B0B0B0";
+  const changeCheckboxState = (
+    e: React.MouseEvent<HTMLInputElement, MouseEvent>
+  ) => {
+    let checkbox = e.target as HTMLInputElement;
+    dispatch(editProduct({ ...product, linked: checkbox.checked }));
+  };
+
+  const changeToggleSwitchState = () => {
+    const newProductsList: ProductProps[] = updateSwitchState(productsList, id);
+
+    dispatch(updateProductsList(newProductsList));
   };
 
   return (
@@ -41,7 +57,7 @@ function ProductCard({ product }: { product: ProductProps }) {
         type={type}
         amount={amount}
         action={action}
-        selectedColor={color}
+        selectedColor={selectedColor}
       />
       <div className="flex justify-between">
         <div className="flex">
@@ -53,7 +69,7 @@ function ProductCard({ product }: { product: ProductProps }) {
             <Tooltip />
           </div>
         </div>
-        <CheckBox linked={linked} />
+        <CheckBox linked={linked} onClickFunction={changeCheckboxState} />
       </div>
       <div className="flex justify-between">
         <p className="text-[14px] text-[#3B755F] leading-[17.01px]">
@@ -78,7 +94,11 @@ function ProductCard({ product }: { product: ProductProps }) {
         <p className="text-[14px] text-[#3B755F] leading-[17.01px]">
           Activate badge
         </p>
-        <ToggleSwitch id={id} active={active} />
+        <ToggleSwitch
+          id={id}
+          active={active}
+          onChangeFunction={changeToggleSwitchState}
+        />
       </div>
     </div>
   );
