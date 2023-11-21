@@ -4,7 +4,7 @@
 
 - [Description](#description)
 - [API Reference](#api-reference)
-- [Installation and Setup Instructions](#installation-and-setup-instructions)
+- [Installation Guide and Setup Instructions](#installation-guide-and-setup-instructions)
 - [Folder structure](#folder-structure)
 - [Used Technologies](#used-technologies)
 
@@ -43,7 +43,7 @@ Product description:
 |    linked     |                    boolean                     | Describes if the widget is linked to the public profile |
 | selectedColor | “white” - “black” - “blue” - “green” - “beige” | Describes the current color of the widget               |
 
-## Installation Guide Setup Instructions
+## Installation Guide and Setup Instructions
 
 #### Install all dependencies
 
