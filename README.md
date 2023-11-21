@@ -1,46 +1,122 @@
-# Getting Started with Create React App
+# Frontend-task
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A front-end service that allows a user to display product widgets.
+As u user i can customize my widgets:
 
-## Available Scripts
+- change the colors
+- active state (only one widget can have the active state at a time)
+- if is linked to my public profile or not
 
-In the project directory, you can run:
+##### Live project
 
-### `npm start`
+```
+https://frontend-task-test.vercel.app/
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## API Reference
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+#### Get all product
 
-### `npm test`
+```
+https://api.mocki.io/v2/016d11e8/product-widgets
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Product description:
 
-### `npm run build`
+|   Property    |                      Type                      | Description                                             |
+| :-----------: | :--------------------------------------------: | :------------------------------------------------------ |
+|      id       |                     number                     | The id of the product widget,incremental integer        |
+|     type      |     “carbon” - “plastic bottles” - "trees"     | The type of the impact                                  |
+|    amount     |                number (integer)                | The amount of the impact                                |
+|    action     |       “collects” - “plants” - “offsets”        | The action which corresponds to an impact type          |
+|    active     |                    boolean                     | Describes if the widget (badge) is active               |
+|    linked     |                    boolean                     | Describes if the widget is linked to the public profile |
+| selectedColor | “white” - “black” - “blue” - “green” - “beige” | Describes the current color of the widget               |
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Installation and Setup Instructions
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+#### Install all dependencies
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```
+npm install
+```
 
-### `npm run eject`
+> This will install the following dependences `react with typescript`, `tailwindcss`, `redux`, `axios.js`, `cypress`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+#### Start Server:
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```
+npm start
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+#### Visit App:
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```
+localhost:3000
+```
 
-## Learn More
+#### Open Cypress for run test
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```
+npx cypress open
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Folder structure
+
+```
+frontend-task/
+  cypress
+  node_modules
+  public/
+    fonts/
+    favicon.ico
+    index.html
+  src/
+    components/
+    controller/
+    models/
+    pages/
+    store/
+    style/
+    utils/
+  cypress.config.ts
+  package-lock.json
+  package.json
+  README.md
+  tailwind.config.js
+  tsconfig.json
+```
+
+#### `Components`
+
+The components folder contain every single component of the entire application. This folder is divided into components used per page and the shared components in all the application.
+
+```
+components/
+  products/
+  shared/
+```
+
+#### `Controller`
+
+Api folder that contains all the logics
+
+#### `Models`
+
+Keeps all the interface files
+
+#### `Pages`
+
+Contains the pages of the web app. In this application the `Products` page
+
+#### `Store`
+
+Global states that are stored and can be easily used throughout the application.
+
+#### `Style`
+
+This folder contains the css files where is present the global.css
+
+#### `Utils`
+
+Contain of some repeatedly used functions that are commonly used in the project.
