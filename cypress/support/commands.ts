@@ -2,7 +2,7 @@
 
 declare namespace Cypress {
   interface Chainable<Subject> {
-    changeColorBadge(
+    changeColourBadge(
       selector: string | undefined,
       ...options: any
     ): Chainable<JQuery<HTMLElement>>;
@@ -10,7 +10,7 @@ declare namespace Cypress {
 }
 
 //Function that controls the color change of the badge
-Cypress.Commands.add("changeColorBadge", (index) => {
+Cypress.Commands.add("changeColourBadge", (index) => {
   cy.get(`[data-testid='badgeColoursGroup-${index}'] > div`).each(
     (elem: JQuery<HTMLElement>) => {
       cy.wrap(elem).click();

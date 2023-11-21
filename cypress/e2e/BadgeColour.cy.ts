@@ -5,7 +5,7 @@ describe("products page test", () => {
     cy.get("[data-testid='container-products'] > div").each(
       (elem: JQuery<HTMLElement>) => {
         const id = elem.attr("id");
-        cy.changeColorBadge(id);
+        cy.changeColourBadge(id);
         const p = cy.get("input[type=radio]");
       }
     );
